@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === "prod") {
   isSecure = true;
 }
 
-export const SESSION_OPTIONS: SessionOptions = {
+export const expressSessionConfig: SessionOptions = {
   secret: process.env.EXPRESS_SESSION_SECRET!,
   name: process.env.EXPRESS_SESSION_NAME,
   cookie: {
