@@ -3,7 +3,7 @@ import session from "express-session";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
 import cors from "cors";
-import * as path from "path";
+import * as allRoutesObj from "./components/allRoutes";
 
 import { expressSessionConfig, redisConfig, corsConfig } from "./config";
 
@@ -19,14 +19,10 @@ app.use(
   })
 );
 app.use(cors(corsConfig));
-app.use(express.static(__dirname + "/www"));
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/www/index.html"), function (err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
+
+const routeArr = Object.values(allRoutesObj);
+routeArr.forEach((route) => {
+  app.use(route);
 });
-app.get("/", (req, res) => res.json({ message: "Billo" }));
 
 export default app;
