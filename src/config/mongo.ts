@@ -1,11 +1,10 @@
-import dotenv from "dotenv";
 import { ConnectionOptions } from "mongoose";
+import dotenv from "dotenv";
 dotenv.config();
 
-const mongoHostName = process.env.MONGO_HOST_NAME;
-const mongoDatabaseName = process.env.MONGO_DATABASE_NAME;
-export const mongoURI = `mongodb://${mongoHostName}/${mongoDatabaseName}`;
-export const mongoConfig: ConnectionOptions = {
+const { MONGO_HOST_NAME, MONGO_DATABASE_NAME } = process.env;
+export const MONGO_URI = `mongodb://${MONGO_HOST_NAME}/${MONGO_DATABASE_NAME}`;
+export const MONGO_OPTIONS: ConnectionOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,

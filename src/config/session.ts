@@ -2,17 +2,14 @@ import { SessionOptions } from "express-session";
 import dotenv from "dotenv";
 dotenv.config();
 
-let isSecure: boolean = false;
-if (process.env.NODE_ENV === "prod") {
-  isSecure = true;
-}
+const IS_PROD = process.env.APP_ENV === "production";
 
-export const expressSessionConfig: SessionOptions = {
+export const SESSION_OPTIONS: SessionOptions = {
   secret: process.env.EXPRESS_SESSION_SECRET!,
   name: process.env.EXPRESS_SESSION_NAME,
   cookie: {
     maxAge: +process.env.EXPRESS_SESSION_IDLE_TIMEOUT!,
-    secure: isSecure,
+    secure: IS_PROD,
     sameSite: true,
   },
   resave: false,
