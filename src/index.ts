@@ -29,19 +29,11 @@ import {
       store: new redisStore({ client }),
     })
   );
-  // const corsOptions = {
-  //   origin: [
-  //     "http://localhost:3333",
-  //     "https://account.indiahci.org",
-  //     "https://hcipai.layerpark.com",
-  //   ],
-  //   credentials: true,
-  // };
-  // const corsOptions = {
-  //   origin: ["http://localhost:1916"],
-  //   credentials: true,
-  // };
-  // app.use(cors(corsOptions));
+  const corsOptions = {
+    origin: ["http://localhost:3333", "https://app.particle.systems"],
+    credentials: true,
+  };
+
   app.use(express.static(__dirname + "/www"));
 
   app.use(login);
