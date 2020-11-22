@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { isUserLogged } from "../../middleware";
 
 const router = Router();
 
@@ -9,7 +8,7 @@ router.get("/login", async (req, res) => {
     expires: new Date(Date.now() + 31556952000),
     httpOnly: false,
   });
-  res.send("Login");
+  res.send("Login Success");
 });
 
 export default router;

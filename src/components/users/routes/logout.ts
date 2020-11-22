@@ -8,7 +8,7 @@ router.get("/logout", async (req, res) => {
       res.clearCookie(process.env.EXPRESS_SESSION_NAME!);
       res.clearCookie("is_logged");
       resolve();
-      res.send("User logged out");
+      res.send("Logout Success");
     });
   });
 });
