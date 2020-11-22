@@ -2,9 +2,9 @@ import { SessionOptions } from "express-session";
 import dotenv from "dotenv";
 dotenv.config();
 
-const IS_PROD = process.env.APP_ENV === "production";
+const IS_PROD = process.env.NODE_ENV === "production";
 
-export const SESSION_OPTIONS: SessionOptions = {
+export const expressSessionConfig: SessionOptions = {
   secret: process.env.EXPRESS_SESSION_SECRET!,
   name: process.env.EXPRESS_SESSION_NAME,
   cookie: {

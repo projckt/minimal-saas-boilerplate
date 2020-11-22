@@ -5,40 +5,50 @@ import Redis from "ioredis";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import { login, logout } from "./routes";
+import { login, logout, home } from "./routes";
 import {
-  APP_OPTIONS,
-  REDIS_OPTIONS,
-  SESSION_OPTIONS,
-  MONGO_URI,
-  MONGO_OPTIONS,
+  appConfig,
+  redisConfig,
+  expressSessionConfig,
+  mongoUri,
+  mongoConfig,
 } from "./config";
 
 (async () => {
   mongoose.set("useCreateIndex", true);
-  await mongoose.connect(MONGO_URI, MONGO_OPTIONS, () => {
+  await mongoose.connect(mongoUri, mongoConfig, () => {
     console.log(`Connected to Mongo`);
   });
   const redisStore = connectRedis(session);
-  const client = new Redis(REDIS_OPTIONS);
+  const client = new Redis(redisConfig);
   const app = express();
   app.use(express.json());
   app.use(
     session({
-      ...SESSION_OPTIONS,
+      ...expressSessionConfig,
       store: new redisStore({ client }),
     })
   );
-  const corsOptions = {
-    origin: ["http://localhost:3693"],
-    credentials: true,
-  };
-  app.use(cors(corsOptions));
+  // const corsOptions = {
+  //   origin: [
+  //     "http://localhost:3333",
+  //     "https://account.indiahci.org",
+  //     "https://hcipai.layerpark.com",
+  //   ],
+  //   credentials: true,
+  // };
+  // const corsOptions = {
+  //   origin: ["http://localhost:1916"],
+  //   credentials: true,
+  // };
+  // app.use(cors(corsOptions));
+  app.use(express.static(__dirname + "/www"));
 
   app.use(login);
   app.use(logout);
+  app.use(home);
 
-  app.listen(APP_OPTIONS.port, () => {
-    console.log(`Server is running on port: ${APP_OPTIONS.port}`);
+  app.listen(appConfig.port, () => {
+    console.log(`Server is running on port: ${appConfig.port}`);
   });
 })();
