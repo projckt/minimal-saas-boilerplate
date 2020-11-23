@@ -8,7 +8,7 @@ router.get("/login", async (req, res) => {
     expires: new Date(Date.now() + 31556952000),
     httpOnly: false,
   });
-  res.send("Login Success");
+  res.send("Inside login");
 });
 
 export default router;
