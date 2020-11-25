@@ -1,16 +1,15 @@
-import { Router } from "express";
+import { Request, Response } from "express";
 
-const router = Router();
-router.get("/logout", async (req, res) => {
+const controller = async (req: Request, res: Response) => {
   new Promise((resolve, reject) => {
     req.session!.destroy((err: Error) => {
       if (err) reject(err);
       res.clearCookie(process.env.EXPRESS_SESSION_NAME!);
       res.clearCookie("is_logged");
       resolve();
-      res.send("Inside logout");
+      res.send("Inside logout,  controller");
     });
   });
-});
+};
 
-export default router;
+export default controller;
