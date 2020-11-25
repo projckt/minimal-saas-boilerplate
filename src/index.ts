@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import app from "./app";
 
-import { appConfig, mongoUri, mongoConfig } from "./config";
+import { nodeConfig, mongoUri, mongoConfig } from "./config";
 
 (async () => {
   mongoose.set("useCreateIndex", true);
@@ -9,7 +9,7 @@ import { appConfig, mongoUri, mongoConfig } from "./config";
     console.log(`Connected to Mongo`);
   });
 
-  app.listen(appConfig.port, () => {
-    console.log(`Server is running on port: ${appConfig.port}`);
+  app.listen(nodeConfig.port, () => {
+    console.log(`Server is running on port: ${nodeConfig.port}`);
   });
 })();
