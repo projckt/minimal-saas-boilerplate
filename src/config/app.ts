@@ -11,15 +11,22 @@ export const appConfig = {
       iso2digitCode: 2,
       iso3digitCode: 3,
     },
+    accountAddressInfo: 1,
     accountBillingInfo: 1,
+    accountBillingAddressInfo: 1,
     accountMetaInfo: 1,
     accountActivityLogInfo: 1,
+    accountCurrencyInfo: 1,
+    accountEmailResetCode: 4,
+    accountPswdResetCode: 4,
   },
   maxLength: {
     accountMobile: {
       iso2digitCode: 2,
       iso3digitCode: 3,
     },
+    accountEmailResetCode: 4,
+    accountPswdResetCode: 4,
   },
 };
 

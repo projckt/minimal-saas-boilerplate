@@ -10,6 +10,10 @@ export const accountActivityLogSchema: Schema = new Schema({
     type: String,
     min: appConfig.minLength.accountActivityLogInfo,
   },
+  activityDescription: {
+    type: String,
+    min: appConfig.minLength.accountActivityLogInfo,
+  },
   activityTimestamp: {
     type: String,
     min: appConfig.minLength.accountActivityLogInfo,
