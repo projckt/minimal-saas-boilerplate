@@ -1,7 +1,7 @@
 import { boolean } from "@hapi/joi";
 import { Schema } from "mongoose";
 import { appConfig } from "../../../../config";
-import { accountActivityLogSchema } from "./accountActivityLogSchema";
+import { userAccountActivityLogSchema } from "./userAccountActivityLogSchema";
 
 export const userSchema: Schema = new Schema(
   {
@@ -10,24 +10,23 @@ export const userSchema: Schema = new Schema(
         type: String,
         required: true,
         unique: true,
-        min: appConfig.minLength.accountID,
+        min: appConfig.user.account.id.minLength,
       },
       holder: {
         name: {
           first: {
             type: String,
             required: true,
-            min: appConfig.minLength.accountUserName,
+            min: appConfig.user.account.holder.name.minLength,
           },
           middle: {
             type: String,
-            required: true,
-            min: appConfig.minLength.accountUserName,
+            min: appConfig.user.account.holder.name.minLength,
           },
           last: {
             type: String,
             required: true,
-            min: appConfig.minLength.accountUserName,
+            min: appConfig.user.account.holder.name.minLength,
           },
         },
         email: {
@@ -36,7 +35,7 @@ export const userSchema: Schema = new Schema(
               type: String,
               required: true,
               unique: true,
-              min: appConfig.minLength.accountEmail,
+              min: appConfig.user.account.holder.email.value.minLength,
             },
             isVerified: {
               type: Boolean,
@@ -47,8 +46,8 @@ export const userSchema: Schema = new Schema(
             resetCode: {
               value: {
                 type: String,
-                min: appConfig.minLength.accountEmailResetCode,
-                max: appConfig.maxLength.accountEmailResetCode,
+                min: appConfig.user.account.holder.email.resetCode.minLength,
+                max: appConfig.user.account.holder.email.resetCode.maxLength,
               },
               isActive: {
                 type: Boolean,
@@ -60,7 +59,7 @@ export const userSchema: Schema = new Schema(
           value: {
             type: String,
             required: true,
-            min: appConfig.minLength.accountPswd,
+            min: appConfig.user.account.holder.pswd.value.minLength,
           },
           isUnderReset: {
             type: Boolean,
@@ -68,8 +67,8 @@ export const userSchema: Schema = new Schema(
           resetCode: {
             value: {
               type: String,
-              min: appConfig.minLength.accountPswdResetCode,
-              max: appConfig.maxLength.accountPswdResetCode,
+              min: appConfig.user.account.holder.pswd.resetCode.minLength,
+              max: appConfig.user.account.holder.pswd.resetCode.maxLength,
             },
             isActive: {
               type: Boolean,
@@ -80,39 +79,48 @@ export const userSchema: Schema = new Schema(
           primary: {
             country: {
               type: String,
-              min: appConfig.minLength.accountMobile.country,
+              min: appConfig.user.account.holder.mobile.country.minLength,
             },
             isdCode: {
               type: String,
-              min: appConfig.minLength.accountMobile.isdCode,
+              min: appConfig.user.account.holder.mobile.isdCode.minLength,
             },
             msisdn: {
               type: String,
-              min: appConfig.minLength.accountMobile.msisdn,
+              min: appConfig.user.account.holder.mobile.msisdn.minLength,
             },
             iso2digitCode: {
               type: String,
-              min: appConfig.minLength.accountMobile.iso2digitCode,
-              max: appConfig.maxLength.accountMobile.iso3digitCode,
+              min: appConfig.user.account.holder.mobile.iso2digitCode.minLength,
+              max: appConfig.user.account.holder.mobile.iso2digitCode.maxLength,
             },
             iso3digitCode: {
               type: String,
-              min: appConfig.minLength.accountMobile.iso3digitCode,
-              max: appConfig.maxLength.accountMobile.iso3digitCode,
+              min: appConfig.user.account.holder.mobile.iso3digitCode.minLength,
+              max: appConfig.user.account.holder.mobile.iso3digitCode.maxLength,
             },
           },
         },
         address: {
-          line1: { type: String, min: appConfig.minLength.accountAddressInfo },
-          line2: { type: String, min: appConfig.minLength.accountAddressInfo },
-          state: { type: String, min: appConfig.minLength.accountAddressInfo },
+          line1: {
+            type: String,
+            min: appConfig.user.account.holder.address.minLength,
+          },
+          line2: {
+            type: String,
+            min: appConfig.user.account.holder.address.minLength,
+          },
+          state: {
+            type: String,
+            min: appConfig.user.account.holder.address.minLength,
+          },
           country: {
             type: String,
-            min: appConfig.minLength.accountAddressInfo,
+            min: appConfig.user.account.holder.address.minLength,
           },
           pinCode: {
             type: String,
-            min: appConfig.minLength.accountAddressInfo,
+            min: appConfig.user.account.holder.address.minLength,
           },
         },
       },
@@ -121,34 +129,34 @@ export const userSchema: Schema = new Schema(
       address: {
         line1: {
           type: String,
-          min: appConfig.minLength.accountBillingAddressInfo,
+          min: appConfig.user.billing.address.minLength,
         },
         line2: {
           type: String,
-          min: appConfig.minLength.accountBillingAddressInfo,
+          min: appConfig.user.billing.address.minLength,
         },
         state: {
           type: String,
-          min: appConfig.minLength.accountBillingAddressInfo,
+          min: appConfig.user.billing.address.minLength,
         },
         country: {
           type: String,
-          min: appConfig.minLength.accountBillingAddressInfo,
+          min: appConfig.user.billing.address.minLength,
         },
         pinCode: {
           type: String,
-          min: appConfig.minLength.accountBillingAddressInfo,
+          min: appConfig.user.billing.address.minLength,
         },
       },
       billTo: {
         type: String,
-        min: appConfig.minLength.accountBillingAddressInfo,
+        min: appConfig.user.billing.info.minLength,
       },
       currency: {
-        country: { type: String, min: appConfig.minLength.accountCurrencyInfo },
-        isoCode: { type: String, min: appConfig.minLength.accountCurrencyInfo },
-        name: { type: String, min: appConfig.minLength.accountCurrencyInfo },
-        symbol: { type: String, min: appConfig.minLength.accountCurrencyInfo },
+        country: { type: String, min: appConfig.user.billing.info.minLength },
+        isoCode: { type: String, min: appConfig.user.billing.info.minLength },
+        name: { type: String, min: appConfig.user.billing.info.minLength },
+        symbol: { type: String, min: appConfig.user.billing.info.minLength },
       },
       tax: {
         india: {
@@ -156,7 +164,7 @@ export const userSchema: Schema = new Schema(
             isGstInvoicePreferred: { type: Boolean },
             gstin: {
               type: String,
-              min: appConfig.minLength.accountBillingInfo,
+              min: appConfig.user.billing.info.minLength,
             },
           },
         },
@@ -165,7 +173,7 @@ export const userSchema: Schema = new Schema(
     meta: {
       accountCreationTimestamp: {
         type: String,
-        min: appConfig.minLength.accountMetaInfo,
+        min: appConfig.user.meta.info.minLength,
       },
       accountLastAccessTimestamp: {
         type: String,
@@ -174,14 +182,14 @@ export const userSchema: Schema = new Schema(
       accountSession: {
         isSessionActive: {
           type: String,
-          min: appConfig.minLength.accountMetaInfo,
+          min: appConfig.user.meta.info.minLength,
         },
         currentSessionId: {
           type: String,
-          min: appConfig.minLength.accountMetaInfo,
+          min: appConfig.user.meta.info.minLength,
         },
       },
-      accountActivityLog: [accountActivityLogSchema],
+      accountActivityLog: [userAccountActivityLogSchema],
       accountStatus: {
         isDeleted: {
           type: Boolean,

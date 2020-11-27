@@ -1,4 +1,4 @@
-import { Document, model, Schema } from "mongoose";
+import { Document, model } from "mongoose";
 import { userSchema } from "./schemas/userSchema";
 import * as argon from "argon2";
 

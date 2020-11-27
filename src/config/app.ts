@@ -1,32 +1,57 @@
 export const appConfig = {
-  minLength: {
-    accountID: 5,
-    accountUserName: 1,
-    accountEmail: 5,
-    accountPswd: 8,
-    accountMobile: {
-      country: 1,
-      isdCode: 1,
-      msisdn: 1,
-      iso2digitCode: 2,
-      iso3digitCode: 3,
+  user: {
+    account: {
+      id: {
+        minLength: 5,
+      },
+      holder: {
+        name: {
+          minLength: 1,
+        },
+        email: {
+          value: {
+            minLength: 5,
+          },
+          resetCode: {
+            minLength: 4,
+            maxLength: 4,
+          },
+        },
+        mobile: {
+          country: {
+            minLength: 1,
+          },
+          isdCode: {
+            minLength: 1,
+          },
+          msisdn: {
+            minLength: 1,
+          },
+          iso2digitCode: {
+            minLength: 2,
+            maxLength: 2,
+          },
+          iso3digitCode: {
+            minLength: 3,
+            maxLength: 3,
+          },
+        },
+        pswd: {
+          value: {
+            minLength: 8,
+          },
+          resetCode: {
+            minLength: 4,
+            maxLength: 4,
+          },
+        },
+        address: {
+          minLength: 1,
+        },
+      },
     },
-    accountAddressInfo: 1,
-    accountBillingInfo: 1,
-    accountBillingAddressInfo: 1,
-    accountMetaInfo: 1,
-    accountActivityLogInfo: 1,
-    accountCurrencyInfo: 1,
-    accountEmailResetCode: 4,
-    accountPswdResetCode: 4,
-  },
-  maxLength: {
-    accountMobile: {
-      iso2digitCode: 2,
-      iso3digitCode: 3,
-    },
-    accountEmailResetCode: 4,
-    accountPswdResetCode: 4,
+    billing: { info: { minLength: 1 }, address: { minLength: 1 } },
+    meta: { info: { minLength: 1 } },
   },
 };
 
