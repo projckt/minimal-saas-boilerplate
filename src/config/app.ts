@@ -36,13 +36,19 @@ export const appConfig = {
             maxLength: 3,
           },
         },
-        pswd: {
-          value: {
-            minLength: 8,
+        authentication: {
+          pswd: {
+            value: {
+              minLength: 8,
+            },
+            resetCode: {
+              minLength: 9,
+              maxLength: 9,
+            },
           },
-          resetCode: {
-            minLength: 4,
-            maxLength: 4,
+          loginCode: {
+            minLength: 9,
+            maxLength: 9,
           },
         },
         address: {
@@ -52,6 +58,14 @@ export const appConfig = {
     },
     billing: { info: { minLength: 1 }, address: { minLength: 1 } },
     meta: { info: { minLength: 1 } },
+    log: {
+      info: { minLength: 1 },
+    },
+  },
+  checkpoint: {
+    info: {
+      minLength: 1,
+    },
   },
 };
 

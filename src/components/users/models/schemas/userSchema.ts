@@ -1,5 +1,5 @@
-import { boolean } from "@hapi/joi";
 import { Schema } from "mongoose";
+import app from "../../../../app";
 import { appConfig } from "../../../../config";
 import { userAccountActivityLogSchema } from "./userAccountActivityLogSchema";
 
@@ -40,10 +40,10 @@ export const userSchema: Schema = new Schema(
             isVerified: {
               type: Boolean,
             },
-            isUnderReset: {
+            isUnderVerification: {
               type: Boolean,
             },
-            resetCode: {
+            verificationCode: {
               value: {
                 type: String,
                 min: appConfig.user.account.holder.email.resetCode.minLength,
@@ -55,23 +55,41 @@ export const userSchema: Schema = new Schema(
             },
           },
         },
-        pswd: {
-          value: {
-            type: String,
-            required: true,
-            min: appConfig.user.account.holder.pswd.value.minLength,
-          },
-          isUnderReset: {
-            type: Boolean,
-          },
-          resetCode: {
+        authentication: {
+          pswd: {
             value: {
               type: String,
-              min: appConfig.user.account.holder.pswd.resetCode.minLength,
-              max: appConfig.user.account.holder.pswd.resetCode.maxLength,
+              min:
+                appConfig.user.account.holder.authentication.pswd.value
+                  .minLength,
             },
-            isActive: {
+            isResetting: {
               type: Boolean,
+            },
+            resetCode: {
+              value: {
+                type: String,
+                min:
+                  appConfig.user.account.holder.authentication.pswd.resetCode
+                    .minLength,
+                max:
+                  appConfig.user.account.holder.authentication.pswd.resetCode
+                    .maxLength,
+              },
+              isActive: {
+                type: Boolean,
+              },
+            },
+          },
+          loginCode: {
+            value: {
+              type: String,
+              min:
+                appConfig.user.account.holder.authentication.loginCode
+                  .minLength,
+              max:
+                appConfig.user.account.holder.authentication.loginCode
+                  .maxLength,
             },
           },
         },
@@ -171,15 +189,17 @@ export const userSchema: Schema = new Schema(
       },
     },
     meta: {
-      accountCreationTimestamp: {
-        type: String,
-        min: appConfig.user.meta.info.minLength,
+      timestamp: {
+        createdOn: {
+          type: String,
+          min: appConfig.user.meta.info.minLength,
+        },
+        lastAccessedOn: {
+          type: String,
+          min: appConfig.user.meta.info.minLength,
+        },
       },
-      accountLastAccessTimestamp: {
-        type: String,
-        min: appConfig.minLength.accountMetaInfo,
-      },
-      accountSession: {
+      session: {
         isSessionActive: {
           type: String,
           min: appConfig.user.meta.info.minLength,
@@ -189,8 +209,16 @@ export const userSchema: Schema = new Schema(
           min: appConfig.user.meta.info.minLength,
         },
       },
-      accountActivityLog: [userAccountActivityLogSchema],
-      accountStatus: {
+      activityLog: [userAccountActivityLogSchema],
+      status: {
+        isEmailVerified: {
+          type: Boolean,
+          required: true,
+        },
+        isAccountComplete: {
+          type: Boolean,
+          required: true,
+        },
         isDeleted: {
           type: Boolean,
         },
