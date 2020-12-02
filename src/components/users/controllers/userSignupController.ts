@@ -6,11 +6,10 @@ const controller = async (req: Request, res: Response) => {
   //   expires: new Date(Date.now() + 31556952000),
   //   httpOnly: false,
   // });
-  let { email } = req.body;
 
   /* Return Success Payload */
   let payload = {
-    email: email,
+    email: res.locals.sanitizedSignupInputs.email,
   };
   return res.json({
     status: "success",

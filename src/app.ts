@@ -3,7 +3,7 @@ import session from "express-session";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
 import cors from "cors";
-import { getRoutePaths } from "./helpers/getAllRoutes";
+import { getRoutePaths } from "./global/helpers/getAllRoutes";
 import { expressSessionConfig, redisConfig, corsConfig } from "./config";
 
 const app = express();

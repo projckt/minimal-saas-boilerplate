@@ -1,8 +1,13 @@
 import { Router } from "express";
 import { userSignupController } from "../controllers";
-import { validateSignupInputs } from "../middlewares";
+import { sanitizeSignupInputs, validateSignupInputs } from "../middlewares";
 
 const router = Router();
-router.post("/signup", validateSignupInputs, userSignupController);
+router.post(
+  "/signup",
+  sanitizeSignupInputs,
+  validateSignupInputs,
+  userSignupController
+);
 
 export default router;

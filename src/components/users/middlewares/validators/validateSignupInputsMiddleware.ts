@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import Joi from "@hapi/joi";
 
-const controller = (req: Request, res: Response, next: NextFunction) => {
+const middleware = (req: Request, res: Response, next: NextFunction) => {
   const emailSchema = Joi.object({
     email: Joi.string()
       .email({ tlds: { allow: false } })
@@ -12,7 +12,7 @@ const controller = (req: Request, res: Response, next: NextFunction) => {
       .required(),
   });
 
-  let { error } = emailSchema.validate(req.body);
+  let { error } = emailSchema.validate(res.locals.sanitizedSignupInputs);
   if (error) {
     let resp = {
       status: "failed",
@@ -20,7 +20,8 @@ const controller = (req: Request, res: Response, next: NextFunction) => {
     };
     return res.send(resp);
   }
+
   next();
 };
 
-export default controller;
+export default middleware;
