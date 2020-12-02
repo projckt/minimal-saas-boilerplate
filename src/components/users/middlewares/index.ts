@@ -1,1 +1,1 @@
-export { default as validateSignupInputs } from "./validateSignupInputsMiddleware";
+export { default as validateSignupInputs } from "./validators/validateSignupInputsMiddleware";

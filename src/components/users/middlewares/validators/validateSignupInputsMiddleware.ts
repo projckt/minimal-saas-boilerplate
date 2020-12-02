@@ -1,9 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-import { emailValidatior } from "../../../utils/validators";
+import Joi from "@hapi/joi";
 
 const controller = (req: Request, res: Response, next: NextFunction) => {
-  console.log("middleware: validate signup inputs");
-  let { error } = emailValidatior(req.body);
+  const emailSchema = Joi.object({
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .min(5)
+      .max(128)
+      .lowercase()
+      .trim()
+      .required(),
+  });
+
+  let { error } = emailSchema.validate(req.body);
   if (error) {
     let resp = {
       status: "failed",

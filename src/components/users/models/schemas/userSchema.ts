@@ -43,7 +43,7 @@ export const userSchema: Schema = new Schema(
             isUnderVerification: {
               type: Boolean,
             },
-            verificationCode: {
+            verificationString: {
               value: {
                 type: String,
                 min: appConfig.user.account.holder.email.resetCode.minLength,
