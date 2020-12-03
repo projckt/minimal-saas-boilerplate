@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { userSignupController } from "../controllers";
-import { sanitizeSignupInputs, validateSignupInputs } from "../middlewares";
+import {
+  createSession,
+  sanitizeSignupInputs,
+  validateSignupInputs,
+} from "../middlewares";
 import {
   disallowSignedupUsers,
   disallowLoggedinUsers,
@@ -13,7 +17,8 @@ router.post(
   validateSignupInputs,
   disallowSignedupUsers,
   disallowLoggedinUsers,
-  userSignupController
+  userSignupController,
+  createSession
 );
 
 export default router;

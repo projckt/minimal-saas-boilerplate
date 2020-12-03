@@ -1,12 +1,6 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
-const controller = async (req: Request, res: Response) => {
-  // req.session!.userId = "1234";
-  // res.cookie("is_logged", true, {
-  //   expires: new Date(Date.now() + 31556952000),
-  //   httpOnly: false,
-  // });
-  /* Check if user is signed up */
+const controller = async (req: Request, res: Response, next: NextFunction) => {
   /* Return Success Payload */
   // let payload = {
   //   email: res.locals.sanitizedSignupInputs.email,
@@ -17,7 +11,7 @@ const controller = async (req: Request, res: Response) => {
   //   message: "Signup successful",
   //   payload: payload,
   // });
-  res.send("OK");
+  next();
 };
 
 export default controller;
