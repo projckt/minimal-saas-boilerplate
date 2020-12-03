@@ -9,8 +9,8 @@ interface userDocument extends Document {
   pswdMatch: (password: string) => Promise<boolean>;
 }
 
-userSchema.methods.pswdMatch = async function (pswd: string) {
-  return await argon.verify(this.account.pswd, pswd);
-};
+// userSchema.methods.pswdMatch = async function (pswd: string) {
+//   return await argon.verify(this.account.pswd, pswd);
+// };
 
 export const userModel = model<userDocument>("user", userSchema);

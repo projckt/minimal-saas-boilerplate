@@ -19,9 +19,9 @@ const middleware = (req: Request, res: Response, next: NextFunction) => {
       msg: error.message,
     };
     return res.send(resp);
+  } else {
+    next();
   }
-
-  next();
 };
 
 export default middleware;
