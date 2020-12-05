@@ -5,9 +5,6 @@ const dal = async (email: string) => {
     "account.holder.email": email,
   });
 
-  console.log("Existing Doc");
-  console.log(userDoc);
-
   let obj = {
     isUserSignedUp: false,
     userDoc: "",
