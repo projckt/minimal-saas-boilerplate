@@ -39,6 +39,7 @@ const middleware = (req: Request, res: Response, next: NextFunction) => {
     };
     return res.send(resp);
   } else {
+    res.locals.validatedSignupInputs = res.locals.sanitizedSignupInputs;
     next();
   }
 };

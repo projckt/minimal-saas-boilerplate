@@ -1,5 +1,4 @@
 import { Schema } from "mongoose";
-import app from "../../../../app";
 import { appConfig } from "../../../../config";
 import { userAccountActivityLogSchema } from "./userAccountActivityLogSchema";
 
@@ -81,17 +80,6 @@ export const userSchema: Schema = new Schema(
               },
             },
           },
-          loginCode: {
-            value: {
-              type: String,
-              min:
-                appConfig.user.account.holder.authentication.loginCode
-                  .minLength,
-              max:
-                appConfig.user.account.holder.authentication.loginCode
-                  .maxLength,
-            },
-          },
         },
         mobile: {
           primary: {
@@ -142,8 +130,45 @@ export const userSchema: Schema = new Schema(
           },
         },
       },
+      meta: {
+        status: {
+          completion: {
+            isComplete: { type: Boolean, required: true },
+            perc: {
+              type: String,
+              min: appConfig.user.meta.info.minLength,
+            },
+          },
+          isMarkedForDeletion: { type: Boolean, required: true },
+        },
+        timestamp: {
+          createdOn: {
+            type: String,
+            min: appConfig.user.meta.info.minLength,
+          },
+          lastAccessedOn: {
+            type: String,
+            min: appConfig.user.meta.info.minLength,
+          },
+        },
+        activityLog: [userAccountActivityLogSchema],
+      },
     },
     billing: {
+      name: {
+        first: {
+          type: String,
+          min: appConfig.user.billing.info.minLength,
+        },
+        middle: {
+          type: String,
+          min: appConfig.user.billing.info.minLength,
+        },
+        last: {
+          type: String,
+          min: appConfig.user.billing.info.minLength,
+        },
+      },
       address: {
         line1: {
           type: String,
@@ -166,10 +191,6 @@ export const userSchema: Schema = new Schema(
           min: appConfig.user.billing.address.minLength,
         },
       },
-      billTo: {
-        type: String,
-        min: appConfig.user.billing.info.minLength,
-      },
       currency: {
         country: { type: String, min: appConfig.user.billing.info.minLength },
         isoCode: { type: String, min: appConfig.user.billing.info.minLength },
@@ -188,39 +209,29 @@ export const userSchema: Schema = new Schema(
         },
       },
     },
-    meta: {
-      timestamp: {
-        createdOn: {
-          type: String,
-          min: appConfig.user.meta.info.minLength,
-        },
-        lastAccessedOn: {
-          type: String,
-          min: appConfig.user.meta.info.minLength,
-        },
+    session: {
+      value: {
+        type: String,
+        min: appConfig.user.meta.info.minLength,
       },
-      session: {
-        isSessionActive: {
-          type: String,
-          min: appConfig.user.meta.info.minLength,
-        },
-        currentSessionId: {
-          type: String,
-          min: appConfig.user.meta.info.minLength,
-        },
+      isActive: {
+        type: Boolean,
+        required: true,
       },
-      activityLog: [userAccountActivityLogSchema],
-      status: {
-        isEmailVerified: {
-          type: Boolean,
-          required: true,
-        },
-        isAccountComplete: {
-          type: Boolean,
-          required: true,
-        },
-        isDeleted: {
-          type: Boolean,
+      meta: {
+        timestamp: {
+          lasrCreatedOn: {
+            type: String,
+            min: appConfig.user.meta.info.minLength,
+          },
+          lastDestroyedOn: {
+            type: String,
+            min: appConfig.user.meta.info.minLength,
+          },
+          expiresOn: {
+            type: String,
+            min: appConfig.user.meta.info.minLength,
+          },
         },
       },
     },

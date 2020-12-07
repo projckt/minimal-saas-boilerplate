@@ -2,19 +2,19 @@ import { Schema } from "mongoose";
 import { appConfig } from "../../../../config";
 
 export const userAccountActivityLogSchema: Schema = new Schema({
-  activityId: {
+  id: {
     type: String,
     min: appConfig.user.log.info.minLength,
   },
-  activityType: {
+  type: {
     type: String,
     min: appConfig.user.log.info.minLength,
   },
-  activityDescription: {
+  description: {
     type: String,
     min: appConfig.user.log.info.minLength,
   },
-  activityTimestamp: {
+  timestamp: {
     type: String,
     min: appConfig.user.log.info.minLength,
   },

@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/projckt/minimal-saas-boilerplate#readme",
   "dependencies": {
-    "argon2": "^0.26.1",
+    "argon2": "^0.27.0",
     "connect-redis": "^4.0.4",
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
