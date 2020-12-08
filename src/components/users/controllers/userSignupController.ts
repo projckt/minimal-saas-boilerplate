@@ -2,10 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import { createUserDocument } from "../dal";
 
 const controller = async (req: Request, res: Response, next: NextFunction) => {
-  let isUserCreated: any = await createUserDocument(
+  let newUserObj: any = await createUserDocument(
     res.locals.validatedSignupInputs
   );
-  res.locals.isUserCreated = isUserCreated;
+
+  res.locals.isUserCreated = newUserObj.isUserCreated;
+  res.locals.userId = newUserObj.userId;
+
   next();
 };
 

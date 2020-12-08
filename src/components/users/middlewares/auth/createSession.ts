@@ -3,7 +3,7 @@ import { cookieConfig } from "../../../../config";
 
 const middleware = (req: Request, res: Response, next: NextFunction) => {
   if (res.locals.isUserCreated) {
-    req.session!.userId = "1234";
+    req.session!.userId = res.locals.userId;
     res.cookie(cookieConfig.isLogged.name!, true, {
       expires: new Date(Date.now() + cookieConfig.isLogged.maxAge),
       httpOnly: true,

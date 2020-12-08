@@ -3,11 +3,12 @@ import { getSignupInputs } from "../../helpers";
 
 const dal = async (validatedSignupInputs: object) => {
   let newUserObj: any = await getSignupInputs(validatedSignupInputs);
-  let isUserCreated: any = await userModel.create(newUserObj);
+  let isUserCreated = await userModel.create(newUserObj);
+
   if (isUserCreated._id) {
-    return true;
+    return { isUserCreated: true, userId: newUserObj.account.id };
   } else {
-    return false;
+    return { isUserCreated: false, userId: "" };
   }
 };
 
