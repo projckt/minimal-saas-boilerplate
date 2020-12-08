@@ -88,7 +88,7 @@ const preprocessor = async (validatedSignupInputs: object) => {
     value: "",
     isActive: false,
     meta: {
-      timestamp: { lasrCreatedOn: "", lastDestroyedOn: "", expiresOn: "" },
+      timestamp: { lastCreatedOn: "", lastDestroyedOn: "", expiresOn: "" },
     },
   };
 
