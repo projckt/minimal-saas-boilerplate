@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as argon2 from "argon2";
 import moment from "moment";
 
-const preprocessor = async (validatedSignupInputs: object) => {
+const preprocessor = async (validatedSignupInputs: any) => {
   let firstName = validatedSignupInputs.firstName;
   let middleName = validatedSignupInputs.middleName;
   let lastName = validatedSignupInputs.lastName;

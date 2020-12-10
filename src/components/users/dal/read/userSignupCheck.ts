@@ -2,22 +2,14 @@ import { userModel } from "../../models/userModel";
 
 const dal = async (email: string) => {
   const userDoc: any = await userModel.findOne({
-    "account.holder.email": email,
+    "account.holder.email.primary.value": email,
   });
 
-  let obj = {
-    isUserSignedUp: false,
-    userDoc: "",
-  };
-
   if (userDoc) {
-    obj.isUserSignedUp = true;
+    return { isUserSignedUp: true };
   } else {
-    obj.isUserSignedUp = false;
-    obj.userDoc = userDoc;
+    return { isUserSignedUp: false, userDoc: userDoc };
   }
-
-  return obj;
 };
 
 export default dal;

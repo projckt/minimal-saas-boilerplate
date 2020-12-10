@@ -5,6 +5,7 @@ const middleware = async (req: Request, res: Response, next: NextFunction) => {
   const userSignupStatus = await userSignupCheck(
     res.locals.sanitizedSignupInputs.email
   );
+
   if (userSignupStatus.isUserSignedUp) {
     return res.json({
       status: "failed",

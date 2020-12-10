@@ -208,7 +208,7 @@ export const userSchema: Schema = new Schema({
     },
   },
   session: {
-    value: {
+    id: {
       type: String,
       min: appConfig.user.meta.info.minLength,
     },
