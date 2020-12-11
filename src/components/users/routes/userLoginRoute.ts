@@ -6,8 +6,8 @@ import {
   validateLoginInputs,
 } from "../middlewares";
 import {
-  disallowLoggedinUsers,
-  disallowNonSignedupUsers,
+  allowNonLoggedInUsers,
+  allowSignedUpUsers,
 } from "../../../global/middlewares";
 
 const router = Router();
@@ -15,8 +15,8 @@ router.post(
   "/login",
   sanitizeLoginInputs,
   validateLoginInputs,
-  disallowLoggedinUsers,
-  disallowNonSignedupUsers,
+  allowNonLoggedInUsers,
+  allowSignedUpUsers,
   userLoginController,
   createSession
 );

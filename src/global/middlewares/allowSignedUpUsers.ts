@@ -2,17 +2,17 @@ import { Request, Response, NextFunction } from "express";
 import { userSignupCheck } from "../../components/users/dal";
 
 const middleware = async (req: Request, res: Response, next: NextFunction) => {
-  let userSignupStatus = await userSignupCheck(
+  let isUserSignedUp: boolean = await userSignupCheck(
     res.locals.sanitizedSignupInputs.email
   );
 
-  if (userSignupStatus.isUserSignedUp) {
+  if (isUserSignedUp) {
+    next();
+  } else {
     return res.json({
       status: "failed",
-      message: "A user is already registered with this email",
+      message: "You are not registered",
     });
-  } else {
-    next();
   }
 };
 

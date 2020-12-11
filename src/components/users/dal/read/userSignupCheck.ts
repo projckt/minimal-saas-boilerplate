@@ -6,9 +6,9 @@ const dal = async (email: string) => {
   });
 
   if (userDoc) {
-    return { isUserSignedUp: true };
+    return true;
   } else {
-    return { isUserSignedUp: false, userDoc: userDoc };
+    return false;
   }
 };
 

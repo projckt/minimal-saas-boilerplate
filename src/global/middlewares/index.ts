@@ -1,4 +1,6 @@
-export { default as disallowLoggedinUsers } from "./disallowLoggedinUsers";
-export { default as disallowNonLoggedInUsers } from "./disallowNonLoggedinUsers";
-export { default as disallowSignedupUsers } from "./disallowSignedupUsers";
-export { default as disallowNonSignedupUsers } from "./disallowNonSignedupUsers";
+// export { default as allowNonLoggedInUsers } from "./allowNonLoggedInUsers";
+
+export {} from "./";
+export { default as allowNonSignedUpUsers } from "./allowNonSignedUpUsers";
+export { default as allowSignedUpUsers } from "./allowSignedUpUsers";
+export { default as allowLoggedInUsers } from "./allowLoggedInUsers";
