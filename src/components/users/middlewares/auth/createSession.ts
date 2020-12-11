@@ -20,7 +20,6 @@ const middleware = async (req: Request, res: Response, next: NextFunction) => {
   );
 
   if (isSessionMetaSaved) {
-    console.log(`[Success] Created new user ${userId}`);
     console.log(`[Success] Updated session meta of ${userId}`);
     let resp = {
       status: "success",
@@ -28,7 +27,6 @@ const middleware = async (req: Request, res: Response, next: NextFunction) => {
     };
     res.json(resp);
   } else {
-    console.log(`[Success] Created new user ${userId}`);
     console.log(`[Failed] Updating session meta of ${userId}`);
     let resp = {
       status: "success",
