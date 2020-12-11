@@ -6,10 +6,18 @@ const controller = async (req: Request, res: Response, next: NextFunction) => {
     res.locals.validatedSignupInputs
   );
 
-  res.locals.isUserCreated = newUserObj.isUserCreated;
   res.locals.userId = newUserObj.userId;
 
-  next();
+  if (newUserObj.isUserCreated) {
+    next();
+  } else {
+    console.log(`[Failed] To signup and create user`);
+    let resp = {
+      status: "failed",
+      message: "User signup failed",
+    };
+    res.json(resp);
+  }
 };
 
 export default controller;

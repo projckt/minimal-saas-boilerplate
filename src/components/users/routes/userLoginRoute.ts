@@ -1,8 +1,24 @@
 import { Router } from "express";
 import { userLoginController } from "../controllers";
-import { disallowLoggedinUsers } from "../../../global/middlewares";
+import {
+  createSession,
+  sanitizeLoginInputs,
+  validateLoginInputs,
+} from "../middlewares";
+import {
+  disallowLoggedinUsers,
+  disallowNonSignedupUsers,
+} from "../../../global/middlewares";
 
 const router = Router();
-router.post("/login", disallowLoggedinUsers, userLoginController);
+router.post(
+  "/login",
+  sanitizeLoginInputs,
+  validateLoginInputs,
+  disallowLoggedinUsers,
+  disallowNonSignedupUsers,
+  userLoginController,
+  createSession
+);
 
 export default router;

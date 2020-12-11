@@ -3,19 +3,7 @@ import { appConfig } from "../../../../config";
 import Joi from "joi";
 
 const middleware = (req: Request, res: Response, next: NextFunction) => {
-  const emailSchema = Joi.object({
-    firstName: Joi.string()
-      .min(appConfig.user.account.holder.name.minLength)
-      .trim()
-      .required(),
-    middleName: Joi.string()
-      .min(appConfig.user.account.holder.name.minLength)
-      .trim()
-      .allow(""),
-    lastName: Joi.string()
-      .min(appConfig.user.account.holder.name.minLength)
-      .trim()
-      .allow(""),
+  const loginInputsSchema = Joi.object({
     email: Joi.string()
       .email({ tlds: { allow: false } })
       .min(appConfig.user.account.holder.email.value.minLength)
@@ -30,16 +18,16 @@ const middleware = (req: Request, res: Response, next: NextFunction) => {
       }),
   });
 
-  let { error } = emailSchema.validate(res.locals.sanitizedSignupInputs);
+  let { error } = loginInputsSchema.validate(res.locals.sanitizedLoginInputs);
 
   if (error) {
     let resp = {
       status: "failed",
-      msg: error.message,
+      message: error.message,
     };
     return res.send(resp);
   } else {
-    res.locals.validatedSignupInputs = res.locals.sanitizedSignupInputs;
+    res.locals.validatedLoginInputs = res.locals.sanitizedLoginInputs;
     next();
   }
 };
