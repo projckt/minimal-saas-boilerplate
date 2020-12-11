@@ -23,14 +23,14 @@ const middleware = async (req: Request, res: Response, next: NextFunction) => {
     console.log(`[Success] Updated session meta of ${userId}`);
     let resp = {
       status: "success",
-      message: "Account Created",
+      message: "Session Created",
     };
     res.json(resp);
   } else {
     console.log(`[Failed] Updating session meta of ${userId}`);
     let resp = {
       status: "success",
-      message: "Account Creation Failed",
+      message: "Session Creation Failed",
     };
     res.json(resp);
   }

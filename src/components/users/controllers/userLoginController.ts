@@ -3,6 +3,7 @@ import { userLoginCheck } from "../dal";
 
 const controller = async (req: Request, res: Response, next: NextFunction) => {
   let userLoginObj: any = await userLoginCheck(res.locals.validatedLoginInputs);
+  res.locals.userId = userLoginObj.userId;
 
   if (userLoginObj.isUserSignedUp && userLoginObj.isPasswordVerified) {
     next();

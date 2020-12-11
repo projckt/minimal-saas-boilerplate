@@ -3,3 +3,4 @@ export { default as userLoginCheck } from "./read/userLoginCheck";
 
 export { default as createUserDocument } from "./write/createUserDocument";
 export { default as saveUserSession } from "./write/saveUserSession";
+export { default as destroyUserSession } from "./write/destroyUserSession";
