@@ -3,7 +3,7 @@ import { userSignupCheck } from "../../components/users/dal";
 
 const middleware = async (req: Request, res: Response, next: NextFunction) => {
   let isUserSignedUp: boolean = await userSignupCheck(
-    res.locals.sanitizedSignupInputs.email
+    res.locals.sanitizedLoginInputs.email
   );
 
   if (isUserSignedUp) {
