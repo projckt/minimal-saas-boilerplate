@@ -68,10 +68,9 @@ export const appConfig = {
     },
   },
   mail: {
-    from: "Particle System no-reply@particle.systems",
     template: {
       sendVerificationLink: {
-        id: "21407413",
+        id: 21407413,
         endpoint: "https://app.particle.systems/verify-email",
       },
       model: {
@@ -89,15 +88,19 @@ export const appConfig = {
             twitter: "https://twitter.com/xtbhyn",
           },
         },
-        support: {
-          email: {
-            value: "support@particle.systems",
-            href: `mailto:support@particle.systems`,
-          },
-        },
         website: {
           name: "Particle Systems",
           url: "https://particle.systems",
+          email: {
+            support: {
+              value: "support@particle.systems",
+              href: `mailto:support@particle.systems`,
+            },
+            noReply: {
+              value: "no-reply@particle.systems",
+              href: "",
+            },
+          },
         },
       },
     },

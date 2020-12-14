@@ -2,19 +2,18 @@ import * as postmark from "postmark";
 import { postmarkServerToken } from "../../../../config";
 import { appConfig } from "../../../../config";
 
-export const mailer = async (
-  firstName: string,
-  email: string,
-  verificationString: string
-) => {
+export const mailer = async (userSignupObj: any) => {
+  let firstName: string = userSignupObj.firstName;
+  let email: string = userSignupObj.email;
+  let verificationString: string = userSignupObj.verificationString;
   let mailToken = postmarkServerToken || "";
   let mailClient = new postmark.Client(mailToken);
   let isMailSent: boolean = false;
 
   await mailClient.sendEmailWithTemplate(
     {
-      From: "IndiaHCI 2020 no-reply@indiahci.org",
-      TemplateId: 18484475,
+      From: `${appConfig.mail.template.model.website.name} ${appConfig.mail.template.model.website.email.noReply.value}`,
+      TemplateId: appConfig.mail.template.sendVerificationLink.id,
       To: email,
       TemplateModel: {
         customerFirstName: firstName,
@@ -26,8 +25,9 @@ export const mailer = async (
           appConfig.mail.template.model.signature.socialUrls.linkedin,
         signaturePersonTwitterUrl:
           appConfig.mail.template.model.signature.socialUrls.twitter,
-        supportEmail: appConfig.mail.template.model.support.email.value,
-        supportEmailHref: appConfig.mail.template.model.support.email.href,
+        supportEmail: appConfig.mail.template.model.website.email.support.value,
+        supportEmailHref:
+          appConfig.mail.template.model.website.email.support.href,
         websiteUrl: appConfig.mail.template.model.website.url,
         websiteName: appConfig.mail.template.model.website.name,
         verificationLinkHref: `${appConfig.mail.template.sendVerificationLink.endpoint}/${verificationString}`,
