@@ -67,6 +67,41 @@ export const appConfig = {
       minLength: 1,
     },
   },
+  mail: {
+    from: "Particle System no-reply@particle.systems",
+    template: {
+      sendVerificationLink: {
+        id: "21407413",
+        endpoint: "https://app.particle.systems/verify-email",
+      },
+      model: {
+        signature: {
+          name: {
+            first: "Tuhin",
+            middle: "",
+            last: "Bhuyan",
+          },
+          designation: "Founder",
+          company: "Particle Systems",
+          dpUrl: "",
+          socialUrls: {
+            linkedin: "https://www.linkedin.com/in/xtbhyn",
+            twitter: "https://twitter.com/xtbhyn",
+          },
+        },
+        support: {
+          email: {
+            value: "support@particle.systems",
+            href: `mailto:support@particle.systems`,
+          },
+        },
+        website: {
+          name: "Particle Systems",
+          url: "https://particle.systems",
+        },
+      },
+    },
+  },
 };
 
 export const dialCodes = [
